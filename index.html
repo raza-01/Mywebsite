@@ -1,14 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="style.css">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <title>My Valentine 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shamiya</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to Shamiya</h1>
-    <p>This is a basic HTML page.</p>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>💘 Will You Be My Valentine? 💘</h1>
+
+    <div class="buttons">
+        <button onclick="goToPage(2)">YES 💕</button>
+        <button class="no">NO 😜</button>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>💖 For You 💖</h1>
+
+    <img src="couple.jpg" class="main-img">
+
+    <p>
+        From the moment you came into my life,<br>
+        everything felt warmer, brighter, and happier.<br>
+        You are my smile, my peace, and my favorite person. 💕
+    </p>
+
+    <img src="heart.png" class="heart" onclick="goToPage(3)">
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <h1>💞 My Promise 💞</h1>
+
+    <img src="couple.jpg" class="main-img">
+
+    <p>
+        I promise to stand by you,<br>
+        laugh with you,<br>
+        support you,<br>
+        and choose you every single day. 💗<br><br>
+        This is just the beginning of us ✨
+    </p>
+
+    <img src="heart.png" class="heart" onclick="goToPage(4)">
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+    <h1>📸 Scan This 💘</h1>
+
+    <p>
+        Scan this QR code for something special 💝
+    </p>
+
+    <img src="qr.png" class="qr">
+</div>
+
+<script>
+function goToPage(pageNumber) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+
+    document.getElementById('page' + pageNumber).classList.add('active');
+}
+</script>
+
 </body>
 </html>

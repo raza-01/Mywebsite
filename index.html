@@ -2,32 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Valentine 💖</title>
+    <title>For SHAMIYA 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<canvas id="fireworks"></canvas>
+
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-    <h1>💘 Will You Be My Valentine? 💘</h1>
+    <h1 class="typing">SHAMIYA 💕 Will You Be My Valentine?</h1>
 
     <div class="buttons">
-        <button onclick="goToPage(2)">YES 💕</button>
-        <button class="no">NO 😜</button>
+        <button id="yesBtn" onclick="goToPage(2)">YES 💖</button>
+        <button id="noBtn" onmouseover="runAway()" onclick="noClicked()">NO 😜</button>
     </div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
-    <h1>💖 For You 💖</h1>
+    <h1 class="typing">Dear SHAMIYA 💖</h1>
 
     <img src="couple.jpg" class="main-img">
 
-    <p>
-        From the moment you came into my life,<br>
-        everything felt warmer, brighter, and happier.<br>
-        You are my smile, my peace, and my favorite person. 💕
+    <p class="typing">
+        SHAMIYA, from the moment you entered my life,<br>
+        everything became brighter and warmer 💕<br>
+        You are my smile, my peace, my favorite person.
     </p>
 
     <img src="heart.png" class="heart" onclick="goToPage(3)">
@@ -35,16 +37,14 @@
 
 <!-- PAGE 3 -->
 <div class="page" id="page3">
-    <h1>💞 My Promise 💞</h1>
+    <h1 class="typing">My Promise to You, SHAMIYA 💞</h1>
 
     <img src="couple.jpg" class="main-img">
 
-    <p>
+    <p class="typing">
         I promise to stand by you,<br>
         laugh with you,<br>
-        support you,<br>
-        and choose you every single day. 💗<br><br>
-        This is just the beginning of us ✨
+        and choose you every single day 💗
     </p>
 
     <img src="heart.png" class="heart" onclick="goToPage(4)">
@@ -52,22 +52,64 @@
 
 <!-- PAGE 4 -->
 <div class="page" id="page4">
-    <h1>📸 Scan This 💘</h1>
-
-    <p>
-        Scan this QR code for something special 💝
-    </p>
-
+    <h1 class="typing">One Last Thing, SHAMIYA 💘</h1>
+    <p class="typing">Scan this QR code 💝</p>
     <img src="qr.png" class="qr">
 </div>
 
 <script>
-function goToPage(pageNumber) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => page.classList.remove('active'));
+let noCount = 0;
 
-    document.getElementById('page' + pageNumber).classList.add('active');
+function goToPage(num) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + num).classList.add('active');
+    startTyping();
 }
+
+function noClicked() {
+    noCount++;
+    const yesBtn = document.getElementById('yesBtn');
+    yesBtn.style.transform = `scale(${1 + noCount * 0.7})`;
+}
+
+function runAway() {
+    const noBtn = document.getElementById('noBtn');
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+function startTyping() {
+    document.querySelectorAll('.typing').forEach(el => {
+        el.classList.remove('type');
+        void el.offsetWidth;
+        el.classList.add('type');
+    });
+}
+
+startTyping();
+
+/* 🎆 FIREWORKS */
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function firework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    for (let i = 0; i < 50; i++) {
+        ctx.beginPath();
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${Math.random() * 360},100%,60%)`;
+        ctx.fill();
+    }
+    setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 600);
+}
+
+setInterval(firework, 900);
 </script>
 
 </body>

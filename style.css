@@ -94,31 +94,21 @@ p {
     50% { transform: scale(1.2); }
 }
 
- <!-- Inline fixes for nicer wrapping and typing animation.
-         You can move these rules into style.css if you prefer. -->
-    <style>
-      /* Allow normal wrapping and nicer hyphenation/wrapping behavior */
-      .typing {
-        white-space: normal;            /* allow normal wrapping */
-        overflow-wrap: break-word;      /* break long words if needed */
-        word-break: break-word;         /* fallback for older browsers */
-        hyphens: auto;                  /* enable hyphenation where supported */
-        line-height: 1.6;
-        max-width: 900px;               /* optional: keep readable line length */
-        margin: 0 auto;
-      }
+/* TYPING ANIMATION */
+.typing {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+}
 
-      /* Keep the typing animation but allow natural wrapping between characters/words */
-      .typing span {
-        display: inline;                /* inline preserves normal word wrapping */
-        opacity: 0;
-        transform: translateY(10px);
-        transition: transform 0.4s ease, opacity 0.4s ease;
-        white-space: pre;               /* preserve single spaces */
-      }
-
-      /* Optional: style for paragraphs so <br> lines look consistent */
-      .typing p, .typing {
-        margin: 0 0 1rem 0;
-      }
-    </style>
+.typing span {
+    display: inline;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    white-space: pre;
+}

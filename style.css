@@ -93,9 +93,12 @@ p {
     cursor: pointer;
 }
 
-.qr {
-    width: 200px;
+.typing span {
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
+
 
 /* ❤️ PULSE */
 @keyframes pulse {
@@ -123,4 +126,5 @@ p {
 @keyframes blink {
     50% { border-color: transparent; }
 }
+
 

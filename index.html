@@ -97,7 +97,16 @@ function runAway() {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
+
+    // Make the first page text visible immediately
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#page1 .fade-text').forEach(el => {
+        el.classList.add('visible');
+    });
+});
+
 </script>
 
 </body>
 </html>
+

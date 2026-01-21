@@ -7,35 +7,7 @@ body {
     overflow: hidden;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
-/* 📸 PHOTO COLLAGE */
-.collage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    max-width: 320px;
-    margin: 30px auto;
-}
-
-.collage img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-}
-
-.collage img:hover {
-    transform: scale(1.05);
-}
-
-
+/* PAGE LAYOUT */
 .page {
     display: none;
     min-height: 100vh;
@@ -58,6 +30,7 @@ p {
     font-size: 1.1em;
 }
 
+/* BUTTONS */
 .buttons button {
     padding: 15px 30px;
     font-size: 1.2em;
@@ -77,6 +50,7 @@ p {
     color: #ff003c;
 }
 
+/* HEART IMAGE */
 .main-img {
     width: 80%;
     max-width: 300px;
@@ -93,38 +67,36 @@ p {
     cursor: pointer;
 }
 
+/* COLLAGE */
+.collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 320px;
+    margin: 30px auto;
+}
+
+.collage img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.collage img:hover {
+    transform: scale(1.05);
+}
+
+/* HEART PULSE */
+@keyframes pulse {
+    50% { transform: scale(1.2); }
+}
+
+/* BEAUTIFUL TYPING */
 .typing span {
     font-weight: 500;
     color: #fff;
     text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
-
-
-/* ❤️ PULSE */
-@keyframes pulse {
-    50% { transform: scale(1.2); }
-}
-
-/* ✨ TYPING */
-.typing {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid white;
-    width: 0;
-}
-
-.type {
-    width: 100%;
-    animation: typing 2.5s steps(40,end), blink 0.7s infinite;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-

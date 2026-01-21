@@ -91,12 +91,12 @@ function runAway() {
     noBtn.style.top = y + "px";
 }
 
-// BEAUTIFUL TYPING FUNCTION
+// BEAUTIFUL TYPING FUNCTION (FIXED <br> ISSUE)
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        // Grab raw text, replace <br> with \n for easier handling
+        // Convert <br> to \n for handling
         let text = el.innerHTML.replace(/<br\s*\/?>/gi, '\n');
-        el.innerHTML = ''; // Clear existing content
+        el.innerHTML = '';
 
         text.split('').forEach((char, i) => {
             if (char === '\n') {
@@ -118,14 +118,9 @@ function startTyping() {
     });
 }
 
-
-
 // INITIAL TYPING
 startTyping();
 </script>
 
 </body>
 </html>
-
-
-

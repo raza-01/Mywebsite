@@ -98,26 +98,35 @@ function runAway() {
 // WORD-BASED TYPING (cleaner than per character)
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        let text = el.innerText;  // get plain text
+        let text = el.innerText;  // get visible text
         el.innerHTML = '';         // clear old content
 
-        const words = text.split(' '); // split by words
-        words.forEach((word, i) => {
-            const span = document.createElement('span');
-            span.textContent = word + ' ';
-            span.style.opacity = 0;
-            span.style.transition = `opacity 0.5s ease, transform 0.5s ease`;
-            span.style.display = 'inline-block';
-            span.style.transform = 'translateY(10px)';
-            el.appendChild(span);
+        // Split text by spaces and line breaks
+        const parts = text.split(/(\s+)/); // keeps spaces
+        parts.forEach((part, i) => {
+            if (part === "\n") {
+                el.appendChild(document.createElement('br'));
+            } else if (part.trim() === '') {
+                // append normal space
+                el.appendChild(document.createTextNode(part));
+            } else {
+                const span = document.createElement('span');
+                span.textContent = part;
+                span.style.opacity = 0;
+                span.style.display = 'inline-block';
+                span.style.transform = 'translateY(10px)';
+                span.style.transition = `opacity 0.4s ease, transform 0.4s ease`;
+                el.appendChild(span);
 
-            setTimeout(() => {
-                span.style.opacity = 1;
-                span.style.transform = 'translateY(0)';
-            }, i * 200); // stagger each word
+                setTimeout(() => {
+                    span.style.opacity = 1;
+                    span.style.transform = 'translateY(0)';
+                }, i * 150); // stagger words
+            }
         });
     });
 }
+
 
 // INITIAL TYPING
 startTyping();
@@ -125,3 +134,4 @@ startTyping();
 
 </body>
 </html>
+

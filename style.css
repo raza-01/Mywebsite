@@ -26,5 +26,4 @@ p { max-width: 600px; margin: 20px auto; font-size: 1.1em; }
 
 @keyframes pulse { 50% { transform: scale(1.2); } }
 
-.typing { white-space: normal; overflow-wrap: break-word; word-break: break-word; hyphens: auto; line-height: 1.6; max-width: 900px; margin: 0 auto; }
 .typing span { display: inline-block; opacity: 0; transform: translateY(10px); }

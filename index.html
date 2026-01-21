@@ -94,28 +94,30 @@ function runAway() {
 // BEAUTIFUL TYPING FUNCTION
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        // Grab raw text (including line breaks inserted by <br>)
-        // Use innerText because it returns visible text with line breaks.
-        const text = el.innerText;
-        el.innerText = ''; // Clear existing text/spans
+        // Grab raw text, replace <br> with \n for easier handling
+        let text = el.innerHTML.replace(/<br\s*\/?>/gi, '\n');
+        el.innerHTML = ''; // Clear existing content
 
-        // Create a span for each character, but keep normal spaces (no &nbsp;)
         text.split('').forEach((char, i) => {
-            const span = document.createElement('span');
-            span.textContent = char;                 // preserve real spaces so wrapping works
-            span.style.opacity = 0;
-            span.style.transform = 'translateY(10px)';
-            span.style.transitionDelay = `${i * 0.03}s`; // staggered delays for animation
-            el.appendChild(span);
+            if (char === '\n') {
+                el.appendChild(document.createElement('br'));
+            } else {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.opacity = 0;
+                span.style.transform = 'translateY(10px)';
+                span.style.transitionDelay = `${i * 0.03}s`;
+                el.appendChild(span);
 
-            // Animate in
-            setTimeout(() => {
-                span.style.opacity = 1;
-                span.style.transform = 'translateY(0)';
-            }, i * 30);
+                setTimeout(() => {
+                    span.style.opacity = 1;
+                    span.style.transform = 'translateY(0)';
+                }, i * 30);
+            }
         });
     });
 }
+
 
 
 // INITIAL TYPING
@@ -124,5 +126,6 @@ startTyping();
 
 </body>
 </html>
+
 
 

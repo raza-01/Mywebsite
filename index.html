@@ -12,7 +12,7 @@
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-    <h1 class="typing">SHAMIYA 💕 Will You Be My Valentine?</h1>
+    <h1 class="typing">💕 Will You Be My Valentine?💕</h1>
 
     <div class="buttons">
         <button id="yesBtn" onclick="goToPage(2)">YES 💖</button>
@@ -27,7 +27,7 @@
     <img src="couple.jpg" class="main-img">
 
     <p class="typing">
-        SHAMIYA, from the moment you entered my life,<br>
+        BABE💕, from the moment you entered my life,<br>
         everything became brighter and warmer 💕<br>
         You are my smile, my peace, my favorite person.
     </p>
@@ -37,7 +37,7 @@
 
 <!-- PAGE 3 -->
 <div class="page" id="page3">
-    <h1 class="typing">My Promise to You, SHAMIYA 💞</h1>
+    <h1 class="typing">My Promise to You 💞</h1>
 
     <img src="couple.jpg" class="main-img">
 
@@ -94,37 +94,37 @@ function runAway() {
 
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        el.classList.remove('type');
-        void el.offsetWidth;
-        el.classList.add('type');
+        const text = el.innerText;
+        el.innerText = ''; // Clear the text
+        el.style.opacity = 1;
+
+        // Create span for each letter
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.innerText = char;
+            span.style.opacity = 0;
+            span.style.display = 'inline-block';
+            span.style.transform = 'translateY(10px)';
+            span.style.transition = `all 0.3s ease ${(i * 0.05)}s`;
+            el.appendChild(span);
+
+            // Animate each letter
+            setTimeout(() => {
+                span.style.opacity = 1;
+                span.style.transform = 'translateY(0)';
+            }, i * 50);
+        });
     });
 }
 
 startTyping();
 
-/* 🎆 FIREWORKS */
-const canvas = document.getElementById('fireworks');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-function firework() {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height / 2;
-    for (let i = 0; i < 50; i++) {
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = `hsl(${Math.random() * 360},100%,60%)`;
-        ctx.fill();
-    }
-    setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 600);
-}
-
-setInterval(firework, 900);
 </script>
 
 </body>
 </html>
+
 
 
 

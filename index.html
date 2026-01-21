@@ -94,23 +94,25 @@ function runAway() {
 // BEAUTIFUL TYPING FUNCTION
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
+        // Grab raw text (including line breaks inserted by <br>)
+        // Use innerText because it returns visible text with line breaks.
         const text = el.innerText;
-        el.innerText = ''; // Clear existing text
+        el.innerText = ''; // Clear existing text/spans
 
+        // Create a span for each character, but keep normal spaces (no &nbsp;)
         text.split('').forEach((char, i) => {
             const span = document.createElement('span');
-            // Replace space with non-breaking space
-            span.innerHTML = char === ' ' ? '&nbsp;' : char;
+            span.textContent = char;                 // preserve real spaces so wrapping works
             span.style.opacity = 0;
-            span.style.display = 'inline-block';
             span.style.transform = 'translateY(10px)';
-            span.style.transition = `all 0.4s ease ${(i * 0.05)}s`;
+            span.style.transitionDelay = `${i * 0.03}s`; // staggered delays for animation
             el.appendChild(span);
 
+            // Animate in
             setTimeout(() => {
                 span.style.opacity = 1;
                 span.style.transform = 'translateY(0)';
-            }, i * 50);
+            }, i * 30);
         });
     });
 }
@@ -122,4 +124,5 @@ startTyping();
 
 </body>
 </html>
+
 

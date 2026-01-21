@@ -10,7 +10,7 @@
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-    <h1 class="typing">💕 Will You Be My Valentine? 💕</h1>
+    <h1 class="fade-text">💕 Will You Be My Valentine? 💕</h1>
 
     <div class="buttons">
         <button id="yesBtn" onclick="goToPage(2)">YES 💖</button>
@@ -20,11 +20,11 @@
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
-    <h1 class="typing">Dear SHAMIYA 💖</h1>
+    <h1 class="fade-text">Dear SHAMIYA 💖</h1>
 
     <img src="couple.jpg" class="main-img">
 
-    <p class="typing">
+    <p class="fade-text">
         BABE💕, from the moment you entered my life,<br>
         everything became brighter and warmer 💕<br>
         You are my smile, my peace, my favorite person.
@@ -35,11 +35,11 @@
 
 <!-- PAGE 3 -->
 <div class="page" id="page3">
-    <h1 class="typing">My Promise to You 💞</h1>
+    <h1 class="fade-text">My Promise to You 💞</h1>
 
     <img src="couple.jpg" class="main-img">
 
-    <p class="typing">
+    <p class="fade-text">
         I promise to stand by you,<br>
         laugh with you,<br>
         and choose you every single day 💗
@@ -50,9 +50,9 @@
 
 <!-- PAGE 4 -->
 <div class="page" id="page4">
-    <h1 class="typing">Us, SHAMIYA 💖</h1>
+    <h1 class="fade-text">Us, SHAMIYA 💖</h1>
 
-    <p class="typing">
+    <p class="fade-text">
         Every picture holds a memory,<br>
         and every memory holds my heart 💕
     </p>
@@ -71,8 +71,14 @@ let noCount = 0;
 // PAGE NAVIGATION
 function goToPage(num) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page' + num).classList.add('active');
-    startTyping();
+    const page = document.getElementById('page' + num);
+    page.classList.add('active');
+
+    // Trigger fade-in
+    page.querySelectorAll('.fade-text').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 50);
+    });
 }
 
 // YES / NO BUTTON EFFECTS
@@ -87,46 +93,10 @@ function runAway() {
     const noBtn = document.getElementById('noBtn');
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    const angle = Math.random() * 40 - 20;
-
     noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-    noBtn.style.transform = `rotate(${angle}deg) scale(${1 + noCount * 0.1})`;
 }
-
-// CHARACTER TYPING FUNCTION (works with <br> and spaces)
-function startTyping() {
-    document.querySelectorAll('.typing').forEach(el => {
-        const html = el.innerHTML; // keep <br> intact
-        el.innerHTML = '';
-
-        // Split into either <br> or a single character
-        const chars = html.match(/<br>|./g);
-
-        chars.forEach((char, i) => {
-            if (char === '<br>') {
-                el.appendChild(document.createElement('br'));
-            } else {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.style.opacity = 0;
-                span.style.display = 'inline-block';
-                span.style.transform = 'translateY(10px)';
-                span.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                el.appendChild(span);
-
-                setTimeout(() => {
-                    span.style.opacity = 1;
-                    span.style.transform = 'translateY(0)';
-                }, i * 30); // stagger animation
-            }
-        });
-    });
-}
-
-// START TYPING ON PAGE LOAD
-startTyping();
 </script>
 
 </body>

@@ -8,8 +8,6 @@
 </head>
 <body>
 
-<canvas id="fireworks"></canvas>
-
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
     <h1 class="typing">💕 Will You Be My Valentine?💕</h1>
@@ -67,16 +65,17 @@
     </div>
 </div>
 
-
 <script>
 let noCount = 0;
 
+// PAGE NAVIGATION
 function goToPage(num) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page' + num).classList.add('active');
     startTyping();
 }
 
+// YES / NO BUTTON EFFECTS
 function noClicked() {
     noCount++;
     const yesBtn = document.getElementById('yesBtn');
@@ -92,23 +91,21 @@ function runAway() {
     noBtn.style.top = y + "px";
 }
 
+// BEAUTIFUL TYPING FUNCTION
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
         const text = el.innerText;
-        el.innerText = ''; // Clear the text
-        el.style.opacity = 1;
+        el.innerText = ''; // Clear existing text
 
-        // Create span for each letter
         text.split('').forEach((char, i) => {
             const span = document.createElement('span');
             span.innerText = char;
             span.style.opacity = 0;
             span.style.display = 'inline-block';
             span.style.transform = 'translateY(10px)';
-            span.style.transition = `all 0.3s ease ${(i * 0.05)}s`;
+            span.style.transition = `all 0.4s ease ${(i * 0.05)}s`;
             el.appendChild(span);
 
-            // Animate each letter
             setTimeout(() => {
                 span.style.opacity = 1;
                 span.style.transform = 'translateY(0)';
@@ -117,15 +114,9 @@ function startTyping() {
     });
 }
 
+// INITIAL TYPING
 startTyping();
-
-
 </script>
 
 </body>
 </html>
-
-
-
-
-

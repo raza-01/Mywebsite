@@ -87,26 +87,26 @@ function runAway() {
     const noBtn = document.getElementById('noBtn');
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    const angle = Math.random() * 40 - 20;
+
     noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
+    noBtn.style.transform = `rotate(${angle}deg) scale(${1 + noCount * 0.1})`;
 }
 
-// SIMPLE CHARACTER TYPING (works with <br> and spaces)
+// CHARACTER TYPING FUNCTION (works with <br> and spaces)
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        const text = el.innerHTML; // keep <br> intact
-        el.innerHTML = '';          // clear old content
+        const html = el.innerHTML; // keep <br> intact
+        el.innerHTML = '';
 
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
+        // Split into either <br> or a single character
+        const chars = html.match(/<br>|./g);
 
-            if (char === '\n') {
+        chars.forEach((char, i) => {
+            if (char === '<br>') {
                 el.appendChild(document.createElement('br'));
-            } else if (char === '<' && text.slice(i, i+4) === '<br>') {
-                // handle <br>
-                el.appendChild(document.createElement('br'));
-                i += 3; // skip the br
             } else {
                 const span = document.createElement('span');
                 span.textContent = char;
@@ -119,13 +119,13 @@ function startTyping() {
                 setTimeout(() => {
                     span.style.opacity = 1;
                     span.style.transform = 'translateY(0)';
-                }, i * 30);
+                }, i * 30); // stagger animation
             }
-        }
+        });
     });
 }
 
-// INITIAL TYPING
+// START TYPING ON PAGE LOAD
 startTyping();
 </script>
 

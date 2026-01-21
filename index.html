@@ -101,13 +101,13 @@ function runAway() {
 // FIXED TYPING FUNCTION
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        // Remove old spans completely
-        let rawText = el.innerHTML.replace(/<br\s*\/?>/gi, '\n');
-        el.innerHTML = '';
+        // Grab visible text with line breaks
+        let text = el.innerText;  // <-- IMPORTANT: use innerText, NOT innerHTML
+        el.innerHTML = '';         // clear old spans
 
-        rawText.split('').forEach((char, i) => {
+        text.split('').forEach((char, i) => {
             if (char === '\n') {
-                el.appendChild(document.createElement('br'));
+                el.appendChild(document.createElement('br')); // preserve line breaks
             } else {
                 const span = document.createElement('span');
                 span.textContent = char;
@@ -117,7 +117,6 @@ function startTyping() {
                 span.style.transitionDelay = `${i * 0.03}s`;
                 el.appendChild(span);
 
-                // Animate character
                 setTimeout(() => {
                     span.style.opacity = 1;
                     span.style.transform = 'translateY(0)';
@@ -127,9 +126,11 @@ function startTyping() {
     });
 }
 
+
 // INITIAL TYPING
 startTyping();
 </script>
 
 </body>
 </html>
+

@@ -99,7 +99,8 @@ function startTyping() {
 
         text.split('').forEach((char, i) => {
             const span = document.createElement('span');
-            span.innerText = char;
+            // Replace space with non-breaking space
+            span.innerHTML = char === ' ' ? '&nbsp;' : char;
             span.style.opacity = 0;
             span.style.display = 'inline-block';
             span.style.transform = 'translateY(10px)';
@@ -114,9 +115,11 @@ function startTyping() {
     });
 }
 
+
 // INITIAL TYPING
 startTyping();
 </script>
 
 </body>
 </html>
+

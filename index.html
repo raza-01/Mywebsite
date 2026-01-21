@@ -10,7 +10,7 @@
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-    <h1 class="typing">💕 Will You Be My Valentine?💕</h1>
+    <h1 class="typing">💕 Will You Be My Valentine? 💕</h1>
 
     <div class="buttons">
         <button id="yesBtn" onclick="goToPage(2)">YES 💖</button>
@@ -82,51 +82,48 @@ function noClicked() {
     yesBtn.style.transform = `scale(${1 + noCount * 0.7})`;
 }
 
-// NO button runs away playfully
+// NO button moves playfully
 function runAway() {
     const noBtn = document.getElementById('noBtn');
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    const angle = Math.random() * 40 - 20;
-
     noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-    noBtn.style.transform = `rotate(${angle}deg) scale(${1 + noCount * 0.1})`;
 }
 
-// WORD-BASED TYPING (cleaner than per character)
+// SIMPLE CHARACTER TYPING (works with <br> and spaces)
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        let text = el.innerText;  // get visible text
-        el.innerHTML = '';         // clear old content
+        const text = el.innerHTML; // keep <br> intact
+        el.innerHTML = '';          // clear old content
 
-        // Split text by spaces and line breaks
-        const parts = text.split(/(\s+)/); // keeps spaces
-        parts.forEach((part, i) => {
-            if (part === "\n") {
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+
+            if (char === '\n') {
                 el.appendChild(document.createElement('br'));
-            } else if (part.trim() === '') {
-                // append normal space
-                el.appendChild(document.createTextNode(part));
+            } else if (char === '<' && text.slice(i, i+4) === '<br>') {
+                // handle <br>
+                el.appendChild(document.createElement('br'));
+                i += 3; // skip the br
             } else {
                 const span = document.createElement('span');
-                span.textContent = part;
+                span.textContent = char;
                 span.style.opacity = 0;
                 span.style.display = 'inline-block';
                 span.style.transform = 'translateY(10px)';
-                span.style.transition = `opacity 0.4s ease, transform 0.4s ease`;
+                span.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 el.appendChild(span);
 
                 setTimeout(() => {
                     span.style.opacity = 1;
                     span.style.transform = 'translateY(0)';
-                }, i * 150); // stagger words
+                }, i * 30);
             }
-        });
+        }
     });
 }
-
 
 // INITIAL TYPING
 startTyping();
@@ -134,4 +131,3 @@ startTyping();
 
 </body>
 </html>
-

@@ -82,50 +82,42 @@ function noClicked() {
     yesBtn.style.transform = `scale(${1 + noCount * 0.7})`;
 }
 
-// Make NO button run away playfully
+// NO button runs away playfully
 function runAway() {
     const noBtn = document.getElementById('noBtn');
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    const angle = Math.random() * 40 - 20;
 
-    // Smooth movement
     noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-
-    // Optional: rotate slightly for fun effect
-    const angle = (Math.random() * 40 - 20); // -20 to +20 degrees
     noBtn.style.transform = `rotate(${angle}deg) scale(${1 + noCount * 0.1})`;
 }
 
-// FIXED TYPING FUNCTION
+// WORD-BASED TYPING (cleaner than per character)
 function startTyping() {
     document.querySelectorAll('.typing').forEach(el => {
-        // Grab visible text with line breaks
-        let text = el.innerText;  // <-- IMPORTANT: use innerText, NOT innerHTML
-        el.innerHTML = '';         // clear old spans
+        let text = el.innerText;  // get plain text
+        el.innerHTML = '';         // clear old content
 
-        text.split('').forEach((char, i) => {
-            if (char === '\n') {
-                el.appendChild(document.createElement('br')); // preserve line breaks
-            } else {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.style.opacity = 0;
-                span.style.transform = 'translateY(10px)';
-                span.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-                span.style.transitionDelay = `${i * 0.03}s`;
-                el.appendChild(span);
+        const words = text.split(' '); // split by words
+        words.forEach((word, i) => {
+            const span = document.createElement('span');
+            span.textContent = word + ' ';
+            span.style.opacity = 0;
+            span.style.transition = `opacity 0.5s ease, transform 0.5s ease`;
+            span.style.display = 'inline-block';
+            span.style.transform = 'translateY(10px)';
+            el.appendChild(span);
 
-                setTimeout(() => {
-                    span.style.opacity = 1;
-                    span.style.transform = 'translateY(0)';
-                }, i * 30);
-            }
+            setTimeout(() => {
+                span.style.opacity = 1;
+                span.style.transform = 'translateY(0)';
+            }, i * 200); // stagger each word
         });
     });
 }
-
 
 // INITIAL TYPING
 startTyping();
@@ -133,4 +125,3 @@ startTyping();
 
 </body>
 </html>
-
